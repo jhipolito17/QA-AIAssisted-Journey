@@ -1,7 +1,8 @@
 # Nonfunctional Test Planner
 
 ## Purpose
-Plan testing for accessibility, performance, reliability, or security.
+
+Help you plan accessibility, performance, reliability, or security testing.
 
 ## What this agent does
 - Identifies risks and scope for quality attributes

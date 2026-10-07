@@ -2,6 +2,15 @@
 
 This repository contains practical AI agent prompts and workflows for Software QA engineers.
 
+## Table of Contents
+- [Purpose](#purpose)
+- [Repository Structure](#repository-structure)
+- [How to Use These Prompts](#how-to-use-these-prompts)
+- [Best Practices](#best-practices)
+- [Shared QA Agent Rules](#shared-qa-agent-rules)
+- [Recommended Workflow](#recommended-workflow)
+- [Next Step](#next-step)
+
 ## Purpose
 
 The goal of this repository is to help QA teams use AI responsibly to:

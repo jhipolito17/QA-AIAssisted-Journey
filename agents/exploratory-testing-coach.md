@@ -1,13 +1,14 @@
 # Exploratory Testing Coach
 
 ## Purpose
-Suggest time-boxed exploratory testing charters and observation points.
+
+Help you explore the product in a structured way to uncover issues scripted tests may miss.
 
 ## What this agent does
-- Helps uncover issues beyond scripted test cases
 - Suggests exploration paths and variations
 - Identifies failure conditions and recovery paths
 - Supports session-based exploratory testing
+- Helps you create useful test charters
 
 ## When to use
 - You want to discover issues beyond scripted testing

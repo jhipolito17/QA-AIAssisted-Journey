@@ -1,7 +1,8 @@
 # Defect Triage and Investigation Assistant
 
 ## Purpose
-Turn failure evidence into reproducible defect reports and investigation steps.
+
+Help you turn failure evidence into a clear defect report and useful investigation steps.
 
 ## What this agent does
 - Summarizes failures clearly

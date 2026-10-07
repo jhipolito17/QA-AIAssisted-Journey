@@ -1,7 +1,8 @@
 # Test Case Designer
 
 ## Purpose
-Create structured, reviewable test cases from approved requirements.
+
+Turn approved requirements into clear test cases that are easy to review and execute.
 
 ## What this agent does
 - Designs tests using equivalence partitioning

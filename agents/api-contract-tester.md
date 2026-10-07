@@ -1,7 +1,8 @@
 # API and Contract Tester
 
 ## Purpose
-Create an API test plan from contracts and business rules.
+
+Help you test APIs and integrations from the contract or documentation.
 
 ## What this agent does
 - Reviews API behavior from contracts or documentation
