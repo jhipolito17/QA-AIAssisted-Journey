@@ -20,6 +20,7 @@ AI assists with analysis and drafting. Humans own all decisions, approvals, and 
 - [Sensitive Domain Rules](#sensitive-domain-rules)
 - [Audit Trail](#audit-trail)
 - [What AI Must Not Do](#what-ai-must-not-do)
+- [Future QA Framework Vision](#future-qa-framework-vision)
 - [Full Best Practices](#full-best-practices)
 
 ---
@@ -60,6 +61,8 @@ agents/
   defect-triage-investigation-assistant.md  — investigate failures and draft bug reports
   nonfunctional-test-planner.md        — plan accessibility, performance, reliability, security testing
   release-quality-advisor.md           — summarize evidence and residual risk for release
+docs/
+  AI-Software-QA-Engineering-Flow.html — interactive diagram of the target automation framework
 ```
 
 ---
@@ -222,6 +225,71 @@ Track AI-assisted work so it can be reviewed, corrected, or explained later:
 - Treat draft documents or proposed criteria as approved
 - Make legal, policy, or compliance decisions
 - Silently change, expand, or narrow scope
+
+---
+
+## Future QA Framework Vision
+
+The [AI Software QA Engineering Flow](docs/AI-Software-QA-Engineering-Flow.html) diagram shows
+the target end-state for a fully AI-augmented, Playwright-based agentic QA automation framework
+built in Java. Open the HTML file in any browser to view the interactive flow.
+
+Requirements are sourced from Jira and Figma, version-controlled in the same git repository as
+the code. AI augments every stage from shift-left planning through production monitoring. All
+quality gate decisions remain human-owned.
+
+### Technology Stack
+
+| Layer | Tools |
+|-------|-------|
+| Test automation | Playwright (Java), Page Object Model, `@WebBrowserTest` |
+| Requirements | Jira (user stories + acceptance criteria), Figma (design specs) |
+| CI/CD | Commit / merge / nightly schedule triggers |
+| Reporting | Allure / Grafana-style dashboard, Jira defect write-back |
+| AI/ML | LLM test generation, ML defect prediction, GenAI root-cause clustering |
+
+### 10-Stage Pipeline
+
+| Stage | Name | What happens |
+|-------|------|--------------|
+| **00** | Requirements Sources | Jira stories and Figma designs version-controlled alongside code |
+| **01** | Shift-Left & Planning | SAST + linting gates, BDD/Gherkin authoring (Three Amigos), AI requirement-to-test generation, risk-based planning, ML predictive defect analytics, exploratory testing sessions |
+| **02** | CI/CD & Environment Setup | Pipeline trigger (commit / merge / schedule), environment provisioning, test data management and masking, AI synthetic data generation |
+| **03** | Test Assets & Kickoff | Test case library, results write-back from prior cycles, human SSO login and go signal, full executor and optional desk-check pre-gate |
+| **04** | Execution & Trace Capture | App under test (staging), execution trace capture, service virtualization and API contract verification, desk-check report |
+| **05** | Automation Generation | UI automation generator (trace → Java + Playwright), API automation generator, non-functional suite (performance / security / accessibility), visual AI regression, self-healing locator repair |
+| **06** | Stabilization & Flaky Handling | Per-tag stabilizer loop, flaky test detector with auto-retry and quarantine, green agentic Playwright automation, non-functional report |
+| **07** | Defect & Release Reporting | Run record with defect drafts, Jira defect reporter, GenAI failure clustering and root-cause analysis, release summary reporter, sprint sign-off |
+| **08** | Environment Teardown | Environment reset, test data archival |
+| **09** | Coverage & Observability | Coverage reporter with velocity write-back, test observability dashboard (trends, flaky history, run analytics) |
+| **10** | Quality Gate & Production Feedback | Go/No-Go dashboard (flaky rate, defect density, perf/security/a11y status), shift-right production and synthetic monitoring |
+
+### AI-Augmented Capabilities
+
+| Capability | Stage | What it does |
+|------------|-------|--------------|
+| AI Requirement-to-Test Generation | 01 | LLM converts user stories and acceptance criteria into draft test cases |
+| ML Predictive Defect Analytics | 01 | Predicts high-risk modules from code churn and defect history; reprioritizes test runs |
+| AI Synthetic Test Data Generation | 02 | GenAI creates realistic edge-case and boundary-value data, GDPR-compliant |
+| Visual AI Regression Testing | 05 | Computer vision detects visual and layout regressions between builds |
+| Self-Healing Test Automation | 05 | AI auto-repairs broken locators when the UI changes, reducing maintenance overhead |
+| GenAI Failure Clustering & Root-Cause | 07 | LLM clusters related failures and drafts probable root cause before human triage |
+
+### Guardrails That Apply to the Future Framework
+
+All guardrails from this repository apply equally to AI-generated test artifacts in the future
+framework. Key additions for an automated pipeline:
+
+- **AI-generated test cases are `[AI DRAFT]`** until a QA Engineer reviews and approves them —
+  even when generated at scale
+- **ML priority recommendations are advisory** — a QA Engineer must confirm scope changes before
+  execution
+- **Self-healing locator repairs must be reviewed** before merging; AI must not silently change
+  test intent
+- **GenAI root-cause drafts are hypotheses**, not confirmed causes — treat them as G-3 applies:
+  do not confirm without observable evidence
+- **Synthetic monitoring alerts are signals**, not defect confirmations — human investigation is
+  required before filing a bug
 
 ---
 

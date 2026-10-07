@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  :root{ --bg1:#0e3a68; --bg2:#1e5c9e; --text:#ffffff; }
+  html,body{
+    margin:0;padding:0;
+    background:linear-gradient(160deg,var(--bg1) 0%, var(--bg2) 55%, var(--bg1) 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text);
+  }
+  .canvas-wrap{ position:relative; width:2520px; height:3035px; }
+  .node{
+    position:absolute; border-radius:10px; padding:12px 16px; box-sizing:border-box;
+    font-size:14px; font-weight:700; line-height:1.3; text-align:center;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35);
+    border:1px solid rgba(255,255,255,0.15);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .node .ttl{ font-size:14.5px; font-weight:800; }
+  .node .desc{ font-size:11.5px; font-weight:500; opacity:0.92; margin-top:4px; display:block; }
+  .oval{ border-radius:50px; }
+  .orange{ background:#d9691f; }
+  .pink{ background:#e08fc7; color:#2a0f24;}
+  .teal{ background:#1fa98a; }
+  .blue{ background:#1d6fd6; }
+  .darkblue{ background:#0b2c52; border:1px solid #3a6ea5;}
+  .black{ background:#0c1420; border:1px solid #3a6ea5;}
+  .yellow{ background:#e8b23b; color:#2a1d02;}
+  .purple{ background:#7b4fd1; }
+  .amber{ background:#c9922e; color:#2a1d02;}
+  .crimson{ background:#b83a58; }
+  .cyan{ background:#1fa0ad; }
+  .gate{ background:#e0592a; border:2px solid #ffd9a0; }
+  .indigo{ background:#4a5fd1; }
+  .slate{ background:#3d7a99; }
+  .forest{ background:#2f8f5b; }
+  .aiviolet{ background:#c23fd8; }
+  .cadet{ background:#2e86ab; }
+  .new-tag{
+    position:absolute; top:-10px; right:-8px; background:#ffd34d; color:#2a1d02;
+    font-size:9.5px; font-weight:800; padding:2px 6px; border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.4);
+  }
+  .ai-tag{
+    position:absolute; top:-10px; right:-8px; background:#52f0c8; color:#042a20;
+    font-size:9.5px; font-weight:800; padding:2px 6px; border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.4);
+  }
+  .rowlabel{
+    position:absolute; font-size:12.5px; font-weight:800; letter-spacing:1px;
+    color:#9fd0ff; text-transform:uppercase;
+  }
+  svg.connectors{ position:absolute; top:0;left:0; width:2520px; height:3035px; overflow:visible; pointer-events:none; }
+  .footer{
+    position:absolute; top:2885px; left:0; width:2520px;
+    padding:0; margin:0; line-height:0; display:block;
+    background:rgba(5,25,50,0.35); border-top:2px solid rgba(255,255,255,0.15);
+  }
+  .footer img{ display:block; width:100%; height:auto; }
+  .title{ position:absolute; top:18px; left:50px; font-size:28px; font-weight:800; }
+  .subtitle{ position:absolute; top:54px; left:50px; font-size:14px; color:#cfe4ff; font-weight:500; max-width:1400px;}
+  .legend{ position:absolute; top:18px; right:50px; font-size:12px; color:#dcebff; line-height:1.85; text-align:left;}
+  .legend span{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px;}
+</style>
+</head>
+<body>
+<div class="canvas-wrap">
+  <div class="title">Software QA Engineering Flow</div>
+  <div class="subtitle">Playwright-based agentic QA automation (Java) · requirements sourced from Jira + Figma, version-controlled in the same repo · risk planning, CI/CD, flaky handling, non-functional testing, industry best practices &amp; AI-augmented QA</div>
+  <div class="legend">
+    <div><span style="background:#2e86ab"></span>Requirements source (Jira/Figma, in-repo)</div>
+    <div><span style="background:#d9691f"></span>Core execution &nbsp; <span style="background:#1d6fd6"></span>Core reporting</div>
+    <div><span style="background:#7b4fd1"></span>Planning/Process (new) &nbsp; <span style="background:#c9922e"></span>CI/CD &amp; Env (new)</div>
+    <div><span style="background:#b83a58"></span>Flaky handling &nbsp; <span style="background:#1fa0ad"></span>Non-functional testing</div>
+    <div><span style="background:#4a5fd1"></span>Industry best practice &nbsp; <span style="background:#3d7a99"></span>Virtualization/Observability</div>
+    <div><span style="background:#e0592a"></span>Quality Gate &nbsp; <span style="background:#2f8f5b"></span>Production feedback</div>
+    <div><span style="background:#c23fd8"></span>AI-augmented QA</div>
+  </div>
+
+  <svg class="connectors">
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#cfe4ff"/>
+      </marker>
+    </defs>
+    <path d="M235,340 L235,382 L645,382 L645,425" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,340 L235,382 L1465,382 L1465,425" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,340 L235,500 L235,500 L235,660" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,340 L645,382 L645,382 L645,425" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,340 L645,382 L1055,382 L1055,425" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,340 L645,852 L1465,852 L1465,1365" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M1465,575 L1465,735 L235,735 L235,895" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M2285,575 L2285,735 L235,735 L235,895" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1045 L645,970 L235,970 L235,895" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,810 L235,735 L645,735 L645,660" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,810 L645,852 L1260,852 L1260,895" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1045 L235,970 L1875,970 L1875,895" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1260,1045 L1260,970 L1875,970 L1875,895" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1045 L235,970 L2285,970 L2285,895" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,1045 L1875,1088 L645,1088 L645,1130" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,1045 L1875,1440 L235,1440 L235,1835" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,1045 L1875,1088 L235,1088 L235,1130" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1280 L645,1322 L235,1322 L235,1365" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1280 L645,1322 L645,1322 L645,1365" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1280 L645,1322 L1055,1322 L1055,1365" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1280 L645,1205 L1055,1205 L1055,1130" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M1055,1280 L1055,1558 L235,1558 L235,1835" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1515 L235,1558 L235,1558 L235,1600" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1515 L645,1558 L235,1558 L235,1600" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1750 L235,1675 L645,1675 L645,1600" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1750 L645,1675 L1055,1675 L1055,1600" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1750 L645,1792 L645,1792 L645,1835" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M1055,1515 L1055,1558 L1465,1558 L1465,1600" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M2285,1045 L2285,1088 L2285,1088 L2285,1130" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1985 L235,1910 L645,1910 L645,1835" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,1985 L645,1910 L1055,1910 L1055,1835" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1985 L235,1910 L1875,1910 L1875,1835" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,1985 L1875,1910 L2285,1910 L2285,1835" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1055,1750 L1055,1910 L235,1910 L235,2070" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1465,1750 L1465,1910 L235,1910 L235,2070" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M2285,1280 L2285,1792 L235,1792 L235,2305" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,1280 L235,1792 L235,1792 L235,2305" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M2285,1985 L2285,2145 L235,2145 L235,2305" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,2220 L235,2262 L235,2262 L235,2305" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,2455 L235,2380 L645,2380 L645,2305" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M235,2455 L235,2380 L1055,2380 L1055,2305" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,2455 L645,2498 L645,2498 L645,2540" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1055,2455 L1055,2498 L645,2498 L645,2540" stroke="#cfe4ff" stroke-width="1.8" stroke-dasharray="5,5" fill="none" marker-end="url(#arrow)"/>
+<path d="M645,2690 L645,2615 L1875,2615 L1875,2540" stroke="#cfe4ff" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<path d="M1280,2615 L15,2615 L15,500 L1280,500" stroke="#8ef0c4" stroke-width="2" stroke-dasharray="6,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M50,2615 L15,2615 L15,500 L1280,500" stroke="#ffd34d" stroke-width="2" stroke-dasharray="6,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M50,2615 L15,2615 L15,735 L50,735" stroke="#ffd34d" stroke-width="2" stroke-dasharray="6,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1055,575 L1055,500 L645,500 L645,425" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,575 L1875,500 L1465,500 L1465,425" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1465,810 L1465,735 L1055,735 L1055,660" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,1515 L1875,1440 L235,1440 L235,1365" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1875,1515 L1875,1558 L235,1558 L235,1600" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1465,1515 L1465,1440 L1055,1440 L1055,1365" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1465,1515 L1465,1558 L1465,1558 L1465,1600" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1280,1910 L15,1910 L15,1675 L460,1675" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+<path d="M1465,1985 L1465,1910 L645,1910 L645,1835" stroke="#eaa6f5" stroke-width="2" stroke-dasharray="4,4" fill="none" marker-end="url(#arrow)"/>
+  </svg>
+
+  <div class="rowlabel" style="top:391px; left:50px;">01 — SHIFT-LEFT & PLANNING</div>
+<div class="rowlabel" style="top:626px; left:50px;">02 — CI/CD & ENVIRONMENT SETUP</div>
+<div class="rowlabel" style="top:861px; left:50px;">03 — TEST ASSETS & KICKOFF</div>
+<div class="rowlabel" style="top:1096px; left:50px;">04 — EXECUTION & TRACE CAPTURE</div>
+<div class="rowlabel" style="top:1331px; left:50px;">05 — AUTOMATION GENERATION</div>
+<div class="rowlabel" style="top:1566px; left:50px;">06 — STABILIZATION & FLAKY HANDLING</div>
+<div class="rowlabel" style="top:1801px; left:50px;">07 — DEFECT & RELEASE REPORTING</div>
+<div class="rowlabel" style="top:2036px; left:50px;">08 — ENVIRONMENT TEARDOWN</div>
+<div class="rowlabel" style="top:2271px; left:50px;">09 — COVERAGE & OBSERVABILITY</div>
+<div class="rowlabel" style="top:2506px; left:50px;">10 — QUALITY GATE & PRODUCTION FEEDBACK</div>
+<div class="rowlabel" style="top:156px; left:50px;">00 — REQUIREMENTS SOURCES (JIRA + FIGMA, SAME REPO)</div>
+  <div class="node indigo" style="top:425px; left:50px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Shift-Left: Static Analysis & Code Review Gate</span><br><span class='desc'>SAST, linting, PR quality checks before merge</span></div>
+<div class="node indigo" style="top:425px; left:460px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">BDD / Gherkin Collaborative Authoring</span><br><span class='desc'>Three Amigos: dev + QA + product define scenarios together</span></div>
+<div class="node aiviolet" style="top:425px; left:870px; width:370px; height:150px;"><div class="ai-tag">AI</div><span class="ttl">AI Requirement-to-Test Generation</span><br><span class='desc'>LLM converts user stories/acceptance criteria into draft test cases</span></div>
+<div class="node purple" style="top:425px; left:1280px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Risk-Based Test Planning</span><br><span class='desc'>Prioritize by risk, change impact, defect history</span></div>
+<div class="node aiviolet" style="top:425px; left:1690px; width:370px; height:150px;"><div class="ai-tag">AI</div><span class="ttl">ML Predictive Defect Analytics</span><br><span class='desc'>Predicts high-risk modules from code churn + history; reprioritizes</span></div>
+<div class="node purple" style="top:425px; left:2100px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Exploratory Testing</span><br><span class='desc'>Agent/human sessions surface new cases + bugs</span></div>
+<div class="node amber" style="top:660px; left:50px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">CI/CD Pipeline Trigger</span><br><span class='desc'>Commit / merge / nightly schedule</span></div>
+<div class="node amber" style="top:660px; left:460px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Environment Provisioning</span><br><span class='desc'>Spin up ASUL env, seed test data</span></div>
+<div class="node indigo" style="top:660px; left:870px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Test Data Management & Masking</span><br><span class='desc'>Synthetic/masked data, GDPR-compliant, versioned</span></div>
+<div class="node aiviolet" style="top:660px; left:1280px; width:370px; height:150px;"><div class="ai-tag">AI</div><span class="ttl">AI Synthetic Test Data Generation</span><br><span class='desc'>GenAI creates realistic edge-case & boundary data</span></div>
+<div class="node pink" style="top:895px; left:50px; width:370px; height:150px;"><span class="ttl">Test cases</span></div>
+<div class="node darkblue" style="top:895px; left:460px; width:370px; height:150px;"><span class="ttl">qa-automation-results-writeback</span><br><span class='desc'>Cycle N Auto-Passed / Auto-Failed</span></div>
+<div class="node yellow oval" style="top:895px; left:870px; width:780px; height:150px;"><span class="ttl">Human: SSO login + opens app, says 'go'</span></div>
+<div class="node orange" style="top:895px; left:1690px; width:370px; height:150px;"><span class="ttl">qa-test-executor</span><br><span class='desc'>Full QA run, drives playwright-mcp</span></div>
+<div class="node orange" style="top:895px; left:2100px; width:370px; height:150px;"><span class="ttl">qa-desk-check-executor</span><br><span class='desc'>OPTIONAL pre-QA gate — Highest-only</span></div>
+<div class="node blue" style="top:1130px; left:50px; width:370px; height:150px;"><span class="ttl">App under test (ASUL stage)</span></div>
+<div class="node pink" style="top:1130px; left:460px; width:370px; height:150px;"><span class="ttl">execution trace</span></div>
+<div class="node slate" style="top:1130px; left:870px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Service Virtualization & Contract Testing</span><br><span class='desc'>Mock dependent services; verify API contracts stay compatible</span></div>
+<div class="node black" style="top:1130px; left:2100px; width:370px; height:150px;"><span class="ttl">desk-check report</span><br><span class='desc'>Promote / no-go verdict</span></div>
+<div class="node teal" style="top:1365px; left:50px; width:370px; height:150px;"><span class="ttl">qa-automation-ui-generator</span><br><span class='desc'>Trace → agentic Java + Playwright (UI)</span></div>
+<div class="node teal" style="top:1365px; left:460px; width:370px; height:150px;"><span class="ttl">qa-automation-api-generator</span><br><span class='desc'>Trace → agentic Java + Playwright API testing</span></div>
+<div class="node cyan" style="top:1365px; left:870px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">qa-automation-non-functional-suite</span><br><span class='desc'>Performance / Security / Accessibility scans</span></div>
+<div class="node aiviolet" style="top:1365px; left:1280px; width:370px; height:150px;"><div class="ai-tag">AI</div><span class="ttl">Visual AI Regression Testing</span><br><span class='desc'>Computer vision detects visual/layout regressions</span></div>
+<div class="node aiviolet" style="top:1365px; left:1690px; width:370px; height:150px;"><div class="ai-tag">AI</div><span class="ttl">Self-Healing Test Automation</span><br><span class='desc'>AI auto-repairs broken locators when UI changes</span></div>
+<div class="node blue" style="top:1600px; left:50px; width:370px; height:150px;"><span class="ttl">qa-automation-stabilizer</span><br><span class='desc'>Run each @Tag 1-by-1; fix until green</span></div>
+<div class="node crimson" style="top:1600px; left:460px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Flaky Test Detector</span><br><span class='desc'>Auto-retry; quarantine flaky vs real failures</span></div>
+<div class="node black" style="top:1600px; left:870px; width:370px; height:150px;"><span class="ttl">agentic Playwright automation</span><br><span class='desc'>Page objects + @WebBrowserTest, green</span></div>
+<div class="node black" style="top:1600px; left:1280px; width:370px; height:150px;"><span class="ttl">Non-functional Report</span><br><span class='desc'>Perf budgets, vuln scan, WCAG issues</span></div>
+<div class="node pink" style="top:1835px; left:50px; width:370px; height:150px;"><span class="ttl">run record</span><br><span class='desc'>Summary + defects + Jira bug drafts</span></div>
+<div class="node blue" style="top:1835px; left:460px; width:370px; height:150px;"><span class="ttl">qa-jira-defect-reporter</span></div>
+<div class="node black" style="top:1835px; left:870px; width:370px; height:150px;"><span class="ttl">Jira Bug tickets</span></div>
+<div class="node aiviolet" style="top:1835px; left:1280px; width:370px; height:150px;"><div class="ai-tag">AI</div><span class="ttl">GenAI Failure Clustering & Root-Cause</span><br><span class='desc'>LLM clusters failures, drafts probable root cause pre-triage</span></div>
+<div class="node blue" style="top:1835px; left:1690px; width:370px; height:150px;"><span class="ttl">qa-release-summary-reporter</span></div>
+<div class="node black" style="top:1835px; left:2100px; width:370px; height:150px;"><span class="ttl">Sprint Summary</span><br><span class='desc'>Sprint sign-off, per release</span></div>
+<div class="node amber" style="top:2070px; left:50px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Environment Teardown</span><br><span class='desc'>Reset env, archive test data</span></div>
+<div class="node blue" style="top:2305px; left:50px; width:370px; height:150px;"><span class="ttl">qa-automation-coverage-reporter</span></div>
+<div class="node black" style="top:2305px; left:460px; width:370px; height:150px;"><span class="ttl">coverage artifact</span><br><span class='desc'>+ col G / AUTO write-back, consolidated velocity</span></div>
+<div class="node slate" style="top:2305px; left:870px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Test Observability & Reporting Dashboard</span><br><span class='desc'>Allure/Grafana-style trends, flaky history, run analytics</span></div>
+<div class="node gate" style="top:2540px; left:50px; width:1190px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Quality Gate Dashboard</span><br><span class='desc'>Go/No-Go · trend velocity · flaky rate % · defect density · perf/security/a11y status</span></div>
+<div class="node forest" style="top:2540px; left:1280px; width:1190px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Shift-Right: Production & Synthetic Monitoring</span><br><span class='desc'>Real-user monitoring, synthetic transactions, incident signals</span></div>
+<div class="node cadet" style="top:190px; left:50px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Jira Requirements</span><br><span class='desc'>User stories & acceptance criteria — version-controlled in the same git repo as the code</span></div>
+<div class="node cadet" style="top:190px; left:460px; width:370px; height:150px;"><div class="new-tag">NEW</div><span class="ttl">Figma Design Specs</span><br><span class='desc'>UI/UX designs, component tokens & prototypes — synced into the same repo</span></div>
+
+  <div class="footer">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLYAAABfCAYAAAD1Yk7MAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAEuOSURBVHhe7d15dFPnnT/+99Vuy4vkRd733cYLmM2AAbMGMFuAkCakSZO0CT1JZs5Mp50zpzNdTs/klLSdTtM27aQ0IYEEEyDsxCGAFzAGbGPwvi/ybku2bMuWZS2/P77S87MWg00gxe3ndY4OWHeRdHV1pfu+n+d5uO7ubrNWq8WuD9pACCGEEEIIIYQQQsjjUPRfq9CtbIVUKoVAIACfzwePxwOPxwPHceA4DgDYvzPBs7+DEEIIIYQQQgghhJC5gIItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBCyJxEwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTuK6u7vNWq0Wuz5oAyGEEEIIIYQQQgghj0PRf61Ct7IVUqkUAoEAfD4fPB4PPB4PHMeB4zgAYP/OBM/+DkIIIYQQQgghhBBC5gIKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEtfd3W3WarXY9UEbCCGEEEIIIYQQQgh5HIr+axW6la2QSqUQCATg8/ng8Xjg8XjgOA4cx+HfmeDZ30EIIYQQQgghhBBCyFxAwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEtfd3W3WarXY9UEbCCGEEEIIIYQQQgh5HIr+axW6la2QSqUQCATg8/ng8Xjg8XjgOA4cx+HfmeDZ30EIIYQQQgghhBBCyFxAwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEtfd3W3WarXY9UEbCCGEEEIIIYQQQgh5HIr+axW6la2QSqUQCATg8/ng8Xjg8XjgOA4cx+HfmeDZ30EIIYQQQgghhBBCyFxAwRYhhBBCCCGEEEIImZMo2CKEEEIIIYQQQgghcxIFW4QQQgghhBBCCCFkTqJgixBCCCGEEEIIIYTMSRRsEUIIIYQQQgghhJA5iYItQgghhBBCCCGEEDInUbBFCCGEEEIIIYQQQuYkCrYIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZkyjYIoQQQgghhBBCCCFzEgVbhBBCCCGEEEIIIWROomCLEEIIIYQQQgghhMxJFGwRQgghhBBCCCGEkDmJgi1CCCGEEEIIIYQQMidRsEUIIYQQQgghhBBC5iQKtgghhBBCCCGEEELInETBFiGEEEIIIYQQQgiZk7ju7m6zVqvFrg/aQAghhBBCCCGEEELI41D0X6vQrWyFVCqFQCAAn8+Hf2fvbqArLQP4Dz/0yFMeeSihhBJKKKGEEkooIYUUUsgjiZSSSCGFEFJIIYUSSioppVBCCaWUUgoppJRCCSmklFJKKaWQQggppZRSSimkEEIIISdnnpnMZDKTZJLMZDKZZDKZJJPJZCaT9u99X/bBNm/36r3d3e4N3t9nvxuSzd537977PF/v7t69+7HoGSGEEEIIIYQQQgghjylHfy1Bt7IVUqkUAoEAn88Hj8cDj8cDx3EcAAAA//9Nbfn5QcuOuQAAAABJRU5ErkJggg==" alt="Infosys Simplus Fluido"/>
+  </div>
+</div>
+</body>
+</html>
